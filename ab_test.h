@@ -7,14 +7,16 @@
 
 class ABTest {
     double pa, pb;
-    int ca, cb, na, nb;
+    int ca, cb, na, nb, n;
 public:
-    ABTest( double, double);
-    void playA();
-    void playB();
+    ABTest( double, double, int);
+    bool next();
     double pValue();
 protected:
+    void playA();
+    void playB();
     int play(double);
+    double random();
 };
 
 #endif //SPLITTEST_AB_TEST_H

@@ -11,13 +11,9 @@ void run(int i, int sims) {
     printf("starting thread %u\n", i);
 
     for(int i = 0; i < sims; i++) {
-        ABTest ab = ABTest(0.02, 0.02*1.08);
-        int n = 121589;
+        ABTest ab = ABTest(0.02, 0.02, 121589);
 
-        for(int j = 0; j < n; j++) {
-            ab.playA();
-            ab.playB();
-        }
+        while (ab.next()) {}
 
         if(ab.pValue() < 0.05) {
             diffs++;
@@ -27,7 +23,8 @@ void run(int i, int sims) {
 
 int main() {
     unsigned int numThreads = thread::hardware_concurrency();
-    int simsPerThread = 10000 / numThreads;
+    int totalSims = 10000;
+    int simsPerThread = totalSims / numThreads;
 
     thread threads[numThreads];
 
@@ -39,7 +36,7 @@ int main() {
     }
 
 
-    printf("%.2f%%\n", double(diffs) / 100.0);
+    printf("%.2f%%\n", 100.0 *double(diffs) / double(numThreads*simsPerThread));
 
     return 0;
 }
