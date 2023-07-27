@@ -7,7 +7,7 @@ using namespace std;
 
 int diffs = 0;
 
-void runSimulation(int i, int sims, double a, double b, int requiredN) {
+void runSimulations(int i, int sims, double a, double b, int requiredN) {
     for(int i = 0; i < sims; i++) {
         ABTest ab = ABTest(a, b, requiredN);
 
@@ -19,14 +19,14 @@ void runSimulation(int i, int sims, double a, double b, int requiredN) {
     }
 }
 
-void runSimulations(string label, int totalSims, double a, double b, int requiredN) {
+void simulate(string label, int totalSims, double a, double b, int requiredN) {
     diffs = 0;
     int numThreads = thread::hardware_concurrency();
     thread threads[numThreads];
     int simsPerThread = totalSims / thread::hardware_concurrency();
 
     for(int i = 0; i < numThreads; i++) {
-        threads[i] = thread(runSimulation, i, simsPerThread, a, b, requiredN);
+        threads[i] = thread(runSimulations, i, simsPerThread, a, b, requiredN);
     }
     for(int i = 0; i < numThreads; i++) {
         threads[i].join();
@@ -41,8 +41,8 @@ int main() {
     double b = a * (1+mde);
     int requiredN = 25580;
 
-    runSimulations("false positive rate", totalSims, a, a, requiredN);
-    runSimulations("true positive rate", totalSims, a, b, requiredN);
+    simulate("false positive rate", totalSims, a, a, requiredN);
+    simulate("true positive rate", totalSims, a, b, requiredN);
 
     return 0;
 }

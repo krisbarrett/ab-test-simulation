@@ -19,3 +19,10 @@ cc_library(
         "@boost//:math"
     ]
 )
+
+cc_test(
+  name = "stats_test",
+  size = "small",
+  srcs = ["stats_test.cc"],
+  deps = ["@com_google_googletest//:gtest_main", ":stats"],
+)
