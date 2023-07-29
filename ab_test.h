@@ -13,9 +13,9 @@ public:
     bool next();
     double pValue();
 protected:
-    void playA();
-    void playB();
-    int play(double);
+    void trialA();
+    void trialB();
+    int trial(double);
     double random();
 };
 

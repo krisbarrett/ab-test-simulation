@@ -22,9 +22,9 @@ ABTest::ABTest(double a, double b, int requiredN) {
 
 bool ABTest::next() {
     if(random() < 0.5) {
-        playA();
+        trialA();
     } else {
-        playB();
+        trialB();
     }
 
     return na < n || nb < n;
@@ -40,17 +40,17 @@ double ABTest::random() {
     return distribution(*generator);
 }
 
-int ABTest::play(double p) {
+int ABTest::trial(double p) {
     return random() <= p ? 1 : 0;
 }
 
-void ABTest::playA() {
-    ca += play(pa);
+void ABTest::trialA() {
+    ca += trial(pa);
     na++;
 }
 
-void ABTest::playB() {
-    cb += play(pb);
+void ABTest::trialB() {
+    cb += trial(pb);
     nb++;
 }
 
