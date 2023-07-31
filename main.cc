@@ -7,7 +7,7 @@ using namespace std;
 
 int diffs = 0;
 
-void runSimulations(int i, int sims, double a, double b, int requiredN) {
+void runSimulations(int sims, double a, double b, int requiredN) {
     for(int i = 0; i < sims; i++) {
         ABTest ab = ABTest(a, b, requiredN);
 
@@ -26,7 +26,7 @@ void simulate(string label, int totalSims, double a, double b, int requiredN) {
     int simsPerThread = totalSims / thread::hardware_concurrency();
 
     for(int i = 0; i < numThreads; i++) {
-        threads[i] = thread(runSimulations, i, simsPerThread, a, b, requiredN);
+        threads[i] = thread(runSimulations, simsPerThread, a, b, requiredN);
     }
     for(int i = 0; i < numThreads; i++) {
         threads[i].join();
