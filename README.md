@@ -7,7 +7,6 @@ The project requires the following dependencies to be installed on your system:
 
 * `Bazel`: A fast, scalable, and multi-language build system.
 * `C++14 or later`: This project uses modern C++ features, and you need to have a C++14 or later compatible compiler.
-* `Boost`: Required for using gamma distribution for statistical calculations. This is included as a build dependency, so there is no need to install Boost on your system.
 
 ## Building
 
@@ -22,7 +21,7 @@ bazel build main
 We have a number of tests to verify the correctness of the program. Run the tests with the following command:
 
 ```bash
-bazel test --cxxopt=-std=c++14 --test_output=all $(bazel query //...)
+bazel test //...
 ```
 
 ## Usage
