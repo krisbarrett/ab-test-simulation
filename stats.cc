@@ -2,7 +2,7 @@
 // Created by krisb on 5/17/20.
 //
 
-#include <boost/math/distributions/gamma.hpp>
+#include <cmath>
 
 double PropTest(double control_conversions, double control_views, double variation_conversions, double variation_views) {
     double a = control_views - control_conversions;
@@ -24,14 +24,12 @@ double PropTest(double control_conversions, double control_views, double variati
         return -1;
     }
 
-    double q1 = pow(a - xa, 2) / xa;
-    double q2 = pow(b - xb, 2) / xb;
-    double q3 = pow(c - xc, 2) / xc;
-    double q4 = pow(d - xd, 2) / xd;
+    double q1 = std::pow(a - xa, 2) / xa;
+    double q2 = std::pow(b - xb, 2) / xb;
+    double q3 = std::pow(c - xc, 2) / xc;
+    double q4 = std::pow(d - xd, 2) / xd;
 
     double chi_sqr = q1 + q2 + q3 + q4;
 
-    boost::math::gamma_distribution<double> gamma(0.5, 2);
-
-    return 1-cdf(gamma, chi_sqr);
+    return 1 - std::erf(std::sqrt(chi_sqr / 2.0));
 }

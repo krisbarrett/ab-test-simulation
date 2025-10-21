@@ -1,15 +1,9 @@
-//
-// Created by krisb on 5/17/20.
-//
-
 #include "stats.h"
-#include "gtest/gtest.h"
+#include <cassert>
+#include <cmath>
 
-TEST(PropTest, ValidInput) {
-    EXPECT_DOUBLE_EQ(PropTest(14, 100, 20, 100), 0.25870176105718945);
+int main() {
+    assert(std::abs(PropTest(14, 100, 20, 100) - 0.25870176105718945) < 1e-9);
+    assert(PropTest(0, 0, 0, 0) == -1);
+    return 0;
 }
-
-TEST(PropTest, InvalidInput) {
-    EXPECT_EQ(PropTest(0, 0, 0, 0), -1);
-}
-
